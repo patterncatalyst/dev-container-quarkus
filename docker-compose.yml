@@ -81,9 +81,7 @@ services:
       - "5005:5005"  # Debug port
       - "8443:8443"  # HTTPS port
     volumes:
-      - ./:/dev-container-quarkus                   # Mount current directory to container working directory
-      - ./src:/dev-container-quarkus/src            # Mount src directory specifically
-      - ./pom.xml:/dev-container-quarkus/pom.xml    # Mount pom.xml
+      - ..:/workspaces:cached
       - maven-cache:/root/.m2                       # Cache Maven dependencies
     environment:
       QUARKUS_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
@@ -97,4 +95,4 @@ services:
         condition: service_healthy
     networks:
       - app-network
-    working_dir: /dev-container-quarkus
+    working_dir: /workspaces/${localWorkspaceFolderBasename}

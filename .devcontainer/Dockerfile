@@ -97,9 +97,9 @@ RUN echo "Verifying installations:" && \
     quarkus --version && \
     echo "All tools successfully installed"
 
-WORKDIR /dev-container-quarkus
+WORKDIR /workspaces/${localWorkspaceFolderBasename}
 
-VOLUME /dev-container-quarkus
+VOLUME /workspaces
 
 # Expose common ports for Quarkus development
 EXPOSE 8080 8443 5005

@@ -2,7 +2,7 @@
   "name": "Quarkus DevContainer",
   "dockerComposeFile": ["../docker-compose.yml"],
   "service": "quarkus-dev",
-  "workspaceFolder": "/dev-container-quarkus",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
   "shutdownAction": "stopCompose",
   "customizations": {
     "jetbrains": {
@@ -14,12 +14,23 @@
       "extensions": [
         "redhat.fabric8-analytics.vscode-quarkus",
         "vscjava.vscode-java-debug",
-        "vscjava.vscode-maven"
+        "vscjava.vscode-maven",
+        "redhat.java",
+        "visualstudioexptteam.vscodeintellicode"
       ],
       "settings": {
-        "terminal.integrated.shell.linux": "/bin/bash"
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "java.server.launchMode": "Standard",
+        "java.configuration.updateBuildConfiguration": "automatic"
       }
-    },
+    }
   },
-  "forwardPorts": [8080]
+  "forwardPorts": [8080, 5432, 9092],
+  "remoteUser": "root",
+  "features": {
+    "ghcr.io/devcontainers/features/java:1": {
+      "version": "none",
+      "installMaven": "false"
+    }
+  }
 }
