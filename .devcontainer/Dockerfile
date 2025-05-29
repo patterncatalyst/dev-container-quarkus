@@ -89,17 +89,24 @@ ENV PATH="/root/.jbang/bin:${PATH}"
 RUN mvn dependency:get -Dartifact=io.quarkus:quarkus-maven-plugin:LATEST:jar -DremoteRepositories=central::default::https://repo.maven.apache.org/maven2 && \
     mvn dependency:get -Dartifact=io.quarkus:quarkus-bom:LATEST:pom -DremoteRepositories=central::default::https://repo.maven.apache.org/maven2
 
+# Create directory structure for SDKMAN path and create a symbolic link
+# This is needed because some tools (like VS Code and GitHub Codespaces) 
+# look for JAVA_HOME in the SDKMAN default location
+RUN mkdir -p /usr/local/sdkman/candidates/java && \
+    ln -s ${JAVA_HOME} /usr/local/sdkman/candidates/java/current
+
 # Verify all installations work properly
 RUN echo "Verifying installations:" && \
     java -version && \
     mvn -version && \
     kcat -V && \
     quarkus --version && \
-    echo "All tools successfully installed"
+    echo "All tools successfully installed" && \
+    echo "JAVA_HOME symlink created at /usr/local/sdkman/candidates/java/current"
 
-WORKDIR /workspaces/dev-container-quarkus
+WORKDIR /dev-container-quarkus
 
-VOLUME /workspaces
+VOLUME /dev-container-quarkus
 
 # Expose common ports for Quarkus development
 EXPOSE 8080 8443 5005

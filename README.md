@@ -4,9 +4,16 @@ This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
 If you want to learn more about Quarkus, please visit its website: <https://quarkus.io/>.
 
-## GitHub Codespaces
+## Development Container Notes
 
-This project is configured to work with GitHub Codespaces. For details on how to use this project with GitHub Codespaces, see [CODESPACES.md](CODESPACES.md).
+This project includes a development container configuration for use with VS Code Remote Containers or GitHub Codespaces. The container is configured with:
+
+- OpenJDK 21
+- Maven
+- Quarkus CLI
+- kcat (Kafka client)
+
+Note: The container includes a symbolic link from `/usr/local/sdkman/candidates/java/current` to the actual Java installation directory. This is needed because some tools (like VS Code and GitHub Codespaces) look for JAVA_HOME in the SDKMAN default location.
 
 ## Running the application in dev mode
 
