@@ -97,7 +97,7 @@ RUN echo "Verifying installations:" && \
     quarkus --version && \
     echo "All tools successfully installed"
 
-WORKDIR /workspaces/${localWorkspaceFolderBasename}
+WORKDIR /workspaces/dev-container-quarkus
 
 VOLUME /workspaces
 

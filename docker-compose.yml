@@ -95,4 +95,4 @@ services:
         condition: service_healthy
     networks:
       - app-network
-    working_dir: /workspaces/${localWorkspaceFolderBasename}
+    working_dir: /workspaces/dev-container-quarkus

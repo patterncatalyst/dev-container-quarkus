@@ -26,11 +26,11 @@ This document explains the changes made to make this project work with GitHub Co
 - Updated volume mounts for the quarkus-dev service:
   - Changed from specific directory mounts to mounting the parent directory to `/workspaces`
   - Added `:cached` option for better performance
-- Updated `working_dir` from `/dev-container-quarkus` to `/workspaces/${localWorkspaceFolderBasename}`
+- Updated `working_dir` from `/dev-container-quarkus` to `/workspaces/dev-container-quarkus`
 
 ### 3. Dockerfile
 
-- Updated `WORKDIR` from `/dev-container-quarkus` to `/workspaces/${localWorkspaceFolderBasename}`
+- Updated `WORKDIR` from `/dev-container-quarkus` to `/workspaces/dev-container-quarkus`
 - Updated `VOLUME` from `/dev-container-quarkus` to `/workspaces`
 
 ## Using with GitHub Codespaces
@@ -54,3 +54,11 @@ If you encounter any issues:
 1. Check the Codespaces logs for any error messages
 2. Ensure all services are running with `docker-compose ps`
 3. Check the application logs with `docker-compose logs quarkus-dev`
+
+### Known Issues
+
+#### localWorkspaceFolderBasename Variable
+
+The `${localWorkspaceFolderBasename}` variable is only available within the devcontainer.json context and is not automatically passed to docker-compose.yml or Dockerfile. To address this issue, we've replaced the variable with a hardcoded value (`dev-container-quarkus`) in both docker-compose.yml and Dockerfile.
+
+If you rename your repository or clone it with a different name, you may need to update these hardcoded values to match your actual folder name.
